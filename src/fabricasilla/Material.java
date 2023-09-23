@@ -33,7 +33,7 @@ public class Material {
 				            comprar();
 				            break;
 				        case 2:
-				            almacenar();
+				            almacenarMaterial();
 				            break;
 				        case 3:
 				            separar();
@@ -48,7 +48,13 @@ public class Material {
 			}
 	    }
 
-	    public void comprar() {
+	    private void separar() {
+			// TODO Auto-generated method stub
+			
+		}
+
+
+		public void comprar() {
 	        try (Scanner registroCompra = new Scanner(System.in)) {
 				System.out.println("Ingrese el nombre del material a comprar:");
 				String nombreMaterial = registroCompra.nextLine();
@@ -77,23 +83,23 @@ public class Material {
 			}
 	    }
 
-	    private void registrarCompraEnArchivo(String nombreMaterial, int cantidadComprada, double precioUnidad) {
-	        try (FileWriter archivo = new FileWriter("/Users/josesalazar/NetBeansProjects/Tarea1/tarea1/registro_compras.txt", true); PrintWriter escritor = new PrintWriter(archivo)) {
+	    private void registrar(String nombreMaterial, int cantidadComprada, double precioUnidad) {
 	            java.util.Date fechaActual = new java.util.Date();
 	            String fechaCompra = fechaActual.toString();
 	            double costoTotal = cantidadComprada * precioUnidad;
 
-	            escritor.println("Fecha: " + fechaCompra);
+	            PrintWriter escritor;
+				escritor.println("Fecha: " + fechaCompra);
 	            escritor.println("Material: " + nombreMaterial);
 	            escritor.println("Cantidad comprada: " + cantidadComprada);
 	            escritor.println("Precio por unidad: $" + precioUnidad);
 	            escritor.println("Costo total: $" + costoTotal);
 	            escritor.println("----------------------------------");
-	        } catch (IOException e) {
+	        } catch (IOException e1) {
 	            System.err.println("Error al registrar la compra en el archivo.");
-	            e.printStackTrace();
+	            e1.printStackTrace();
 	        }
-	    }
+	    
 
 	    public void almacenarMaterial() {
 	        Scanner registroMaterial = new Scanner(System.in);
@@ -116,18 +122,18 @@ public class Material {
 	        System.out.println(cantidadAgregar + " unidades de " + nombreMaterial + " agregadas al inventario con éxito.");
 	    }
 
-	    private void registrarAdicionEnArchivo(String nombreMaterial, int cantidadAgregada) {
-	        try (FileWriter archivo = new FileWriter("/Users/josesalazar/NetBeansProjects/Tarea1/tarea1/registro_inventario.txt", true); PrintWriter escritor = new PrintWriter(archivo)) {
+	    private void registrar1(String nombreMaterial, int cantidadAgregada) {
 	            java.util.Date fechaActual = new java.util.Date();
 	            String fechaAdicion = fechaActual.toString();
 
-	            escritor.println("Fecha: " + fechaAdicion);
+	            PrintWriter escritor;
+				escritor.println("Fecha: " + fechaAdicion);
 	            escritor.println("Material: " + nombreMaterial);
 	            escritor.println("Cantidad agregada: " + cantidadAgregada);
 	            escritor.println("----------------------------------");
-	        } catch (IOException e) {
+	        } catch (IOException e11) {
 	            System.err.println("Error al registrar la adición al inventario en el archivo.");
-	            e.printStackTrace();
+	            e1.printStackTrace();
 	        }
 	    }
 
@@ -151,14 +157,13 @@ public class Material {
 
 				this.a -= cantidadSeparar;
 
-				registrarSeparacionEnArchivo(nombreMaterial, cantidadSeparar);
+				registrar1(nombreMaterial, cantidadSeparar);
 
 				System.out.println(cantidadSeparar + " unidades de " + nombreMaterial + " separadas del inventario con éxito.");
 			}
 	    }
 
-	    private void registrarSeparacionEnArchivo(String nombreMaterial, int cantidadSeparada) {
-	        try (FileWriter archivo = new FileWriter("/Users/josesalazar/NetBeansProjects/Tarea1/tarea1/registro_separacion.txt", true); PrintWriter escritor = new PrintWriter(archivo)) {
+	    private void registrar(String nombreMaterial, int cantidadSeparada) {
 	            java.util.Date fechaActual = new java.util.Date();
 	            String fechaSeparacion = fechaActual.toString();
 
@@ -168,8 +173,7 @@ public class Material {
 	            escritor.println("Cantidad separada: " + cantidadSeparada);
 	            escritor.println("----------------------------------");
 	        } catch (IOException e) {
-	            System.err.println("Error al registrar la separación en el archivo.");
-	            e.printStackTrace();
+	            
 	        }
 	    }
 
